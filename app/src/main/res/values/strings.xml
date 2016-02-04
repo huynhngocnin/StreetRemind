@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">StreetRemind</string>
     <string name="title_activity_maps">Street Remind</string>
+    <string name="button_send">Send</string>
 </resources>

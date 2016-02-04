@@ -48,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
         //Get database
         //database = createCouch();
 
@@ -115,7 +116,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mp.position(new LatLng(16.0609723, 108.2161258));
         //mp.icon(BitmapDescriptorFactory.fromResource(R.)));
         mp.title("Đây là khu vực cấm nghe ku");
-        mp.snippet("Coi chừng mất mạng đó");
+        mp.snippet("Coi chừng mất mạng đó. Ta đã thử và chết tại đây ^^");
         mMap.addMarker(mp);
 
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
