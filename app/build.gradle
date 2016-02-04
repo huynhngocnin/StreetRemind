@@ -40,4 +40,5 @@ dependencies {
     compile 'com.github.shell-software:fab:1.1.2'
     compile 'com.couchbase.lite:couchbase-lite-android:1.1.0'
     compile 'com.karumi:expandableselector:1.0.0'
+    compile 'com.android.support:design:23.1.1'
 }
