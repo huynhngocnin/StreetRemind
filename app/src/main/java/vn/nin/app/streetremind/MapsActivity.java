@@ -22,14 +22,18 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.software.shell.fab.ActionButton;
+import com.gordonwong.materialsheetfab.MaterialSheetFab;
+import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 
+import vn.nin.app.streetremind.Module.Fab;
 import vn.nin.app.streetremind.database.DatabaseHelper;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
 
     private GoogleMap mMap = null;
     private Database database = null;
+
+    private MaterialSheetFab materialSheetFab;
 
     public static final String DB_NAME = "couchbasestreet";
 
@@ -40,17 +44,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
         // And then find it within the content view:
-        ActionButton actionButton = (ActionButton) findViewById(R.id.action_button);
-        actionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Tính click làm chi ku?", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        ActionButton actionButton = (ActionButton) findViewById(R.id.action_button);
+//        actionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(), "Tính click làm chi ku?", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
+        setupFab();
 
         //Get database
-        //database = createCouch();
+        database = createCouch();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -143,9 +148,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(hagl));
     }
 
+    @Override
+    public void onClick(View v) {
+        if (R.id.fab_sheet_item_police == v.getId()) {
+            Toast.makeText(getApplicationContext(), "Police", Toast.LENGTH_SHORT).show();
+            materialSheetFab.hideSheet();
+        } else if (R.id.fab_sheet_item_traffic == v.getId()) {
+            Toast.makeText(getApplicationContext(), "Traffic", Toast.LENGTH_SHORT).show();
+            materialSheetFab.hideSheet();
+        } else if (R.id.fab_sheet_item_speed == v.getId()) {
+            Toast.makeText(getApplicationContext(), "Speed", Toast.LENGTH_SHORT).show();
+            materialSheetFab.hideSheet();
+        } else {
+            Toast.makeText(getApplicationContext(), "Other", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Sets up the Floating action button.
+     */
+    private void setupFab() {
+
+        Fab fab = (Fab) findViewById(R.id.fab);
+        View sheetView = findViewById(R.id.fab_sheet);
+        View overlay = findViewById(R.id.overlay);
+        int sheetColor = getResources().getColor(R.color.wallet_bright_foreground_disabled_holo_light);
+        int fabColor = getResources().getColor(R.color.colorAccent);
+
+
+        // Create material sheet FAB
+        materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay, sheetColor, fabColor);
+
+
+        // Set material sheet event listener
+        materialSheetFab.setEventListener(new MaterialSheetFabEventListener() {
+            @Override
+            public void onShowSheet() {
+//                // Save current status bar color
+//                statusBarColor = getStatusBarColor();
+//                // Set darker status bar color to match the dim overlay
+//                setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+            }
+
+            @Override
+            public void onHideSheet() {
+//                // Restore status bar color
+//                setStatusBarColor(statusBarColor);
+            }
+        });
+
+        // Set material sheet item click listeners
+        findViewById(R.id.fab_sheet_item_police).setOnClickListener(this);
+        findViewById(R.id.fab_sheet_item_traffic).setOnClickListener(this);
+        findViewById(R.id.fab_sheet_item_speed).setOnClickListener(this);
+    }
+
     private Database createCouch() {
         Manager manager = null;
-        Database database = null;
         try {
             manager = new Manager(new AndroidContext(this), Manager.DEFAULT_OPTIONS);
             database = manager.getDatabase(DB_NAME);

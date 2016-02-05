@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">StreetRemind</string>
     <string name="title_activity_maps">Street Remind</string>
-    <string name="button_send">Send</string>
-    <string name="title_activity_registry__location">Location Report</string>
+    <string name="fab_item_police">Police</string>
+    <string name="fab_item_traffic">Traffic</string>
+    <string name="fab_item_speed">Speed</string>
+
+
 </resources>

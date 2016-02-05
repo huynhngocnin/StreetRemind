@@ -1,6 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:expandable_selector="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,24 +10,86 @@
         android:layout_height="match_parent"
         tools:context="vn.nin.app.streetremind.MapsActivity"></fragment>
 
-    <com.software.shell.fab.ActionButton
-    android:id="@+id/action_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
-    fab:button_color="@color/fab_material_blue_500"
-    fab:button_colorPressed="@color/fab_material_blue_900"
-    fab:button_colorRipple="@color/fab_material_red_500"
-    fab:hide_animation="@anim/fab_roll_to_down"
-    fab:image="@drawable/fab_plus_icon"
-    fab:image_size="24dp"
-    fab:rippleEffect_enabled="true"
-    fab:shadowResponsiveEffect_enabled="true"
-    fab:show_animation="@anim/fab_roll_from_down"
-    fab:stroke_color="@color/fab_material_blue_grey_500"
-    fab:stroke_width="0.0dp"
-    fab:type="DEFAULT" />
+    <!--xmlns:fab="http://schemas.android.com/apk/res-auto"-->
+    <!--<com.software.shell.fab.ActionButton-->
+    <!--android:id="@+id/action_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--fab:button_color="@color/fab_material_blue_500"-->
+    <!--fab:button_colorPressed="@color/fab_material_blue_900"-->
+    <!--fab:button_colorRipple="@color/fab_material_red_500"-->
+    <!--fab:hide_animation="@anim/fab_roll_to_down"-->
+    <!--fab:image="@drawable/fab_plus_icon"-->
+    <!--fab:image_size="24dp"-->
+    <!--fab:rippleEffect_enabled="true"-->
+    <!--fab:shadowResponsiveEffect_enabled="true"-->
+    <!--fab:show_animation="@anim/fab_roll_from_down"-->
+    <!--fab:stroke_color="@color/fab_material_blue_grey_500"-->
+    <!--fab:stroke_width="0.0dp"-->
+    <!--fab:type="DEFAULT" />-->
 
+    <!-- Your FAB implementation -->
+    <vn.nin.app.streetremind.Module.Fab
+        android:id="@+id/fab"
+        style="@style/Widget.MaterialSheetFab.Fab"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+    <!-- Overlay that dims the screen -->
+    <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Circular reveal container for the sheet -->
+    <io.codetail.widget.RevealLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="end|bottom"
+        android:orientation="vertical">
+
+        <!-- Sheet that contains your items -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/fab_sheet"
+            android:layout_width="160dp"
+            android:layout_height="200dp">
+
+            <!-- Sheet items -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Police -->
+                <TextView
+                    android:id="@+id/fab_sheet_item_police"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/police"
+                    android:drawableStart="@drawable/police"
+                    android:text="@string/fab_item_police" />
+
+                <!-- Traffic -->
+                <TextView
+                    android:id="@+id/fab_sheet_item_traffic"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/traffic"
+                    android:drawableStart="@drawable/traffic"
+                    android:text="@string/fab_item_traffic" />
+
+                <!-- Speed -->
+                <TextView
+                    android:id="@+id/fab_sheet_item_speed"
+                    style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                    android:drawableLeft="@drawable/speed"
+                    android:drawableStart="@drawable/speed"
+                    android:text="@string/fab_item_speed" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </io.codetail.widget.RevealLinearLayout>
 
 </RelativeLayout>
