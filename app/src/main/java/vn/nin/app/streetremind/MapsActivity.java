@@ -22,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.VisibleRegion;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 
@@ -128,6 +129,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
                 Toast.makeText(getApplicationContext(), "Đổi chỗ rồi ku\n" + cameraPosition.toString(), Toast.LENGTH_SHORT).show();
+
+                VisibleRegion vr = mMap.getProjection().getVisibleRegion();
+                double left = vr.latLngBounds.southwest.longitude;
+                double top = vr.latLngBounds.northeast.latitude;
+                double right = vr.latLngBounds.northeast.longitude;
+                double bottom = vr.latLngBounds.southwest.latitude;
+
+
             }
         });
 
